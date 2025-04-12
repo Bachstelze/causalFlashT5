@@ -3,6 +3,22 @@ import torch
 import yaml
 import sys
 import glob
+import sys
+
+# Get the absolute path of the current file
+current_file_path = os.path.abspath(__file__)
+
+# Get the directory of the current file (babyLM10M)
+current_dir = os.path.dirname(current_file_path)
+
+# Get the parent directory (examples)
+parent_dir = os.path.dirname(current_dir)
+
+# Get the grandparent directory (causalFlashT5), which contains src
+grandparent_dir = os.path.dirname(parent_dir)
+
+# Add the grandparent directory to the Python module search path
+sys.path.append(grandparent_dir)
 
 # Configure wandb
 os.environ["WANDB_PROJECT"] = "Flash-T5-babyLM10M"
