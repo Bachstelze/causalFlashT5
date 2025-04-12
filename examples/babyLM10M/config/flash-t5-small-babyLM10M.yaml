@@ -57,7 +57,7 @@ training_args:
   optim: adamw_torch
   overwrite_output_dir: true
   per_device_eval_batch_size: 128
-  per_device_train_batch_size: 512
+  per_device_train_batch_size: 256
   remove_unused_columns: false
   resume_from_checkpoint: null
   save_safetensors: false
