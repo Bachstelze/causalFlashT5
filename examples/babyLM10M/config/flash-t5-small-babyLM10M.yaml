@@ -1,8 +1,8 @@
 model_name: flash-t5-small-babyLM10M
 version : 1
 tokenizer_name: tokenizer-fat5-babyLM10M
-train_dataset: /mnt/data1/Datasets/NLP/tokenized/babyLM10M_tokenized_flasht5/train
-valid_dataset: /mnt/data1/Datasets/NLP/tokenized/babyLM10M_tokenized_flasht5/valid
+train_dataset: babyLM10M_tokenized_flasht5/train
+valid_dataset: babyLM10M_tokenized_flasht5/valid
 checkpoint_name: true
 model_args:
   attention_dropout_rate: 0.0
