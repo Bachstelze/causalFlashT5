@@ -20,12 +20,12 @@ model_args:
   num_layers: 6
   position_encoding_type: t5
   tie_word_embeddings: false
-  attention_type: triton
+  attention_type: ref
   use_glu_mlp: true
   use_randomized_position_encoding: false
   z_loss: 0.0001
-  use_triton_layernorm: true
-  use_triton_crossentropy: true
+  use_triton_layernorm: false
+  use_triton_crossentropy: false
   use_triton_gated_mlp: false
   use_gelu_act: true
   use_full_bias_size: false
