@@ -16,7 +16,7 @@ def batch_iterator(dataset, batch_size=1000):
         yield batch["text"]
 
 # include learning prefix
-special_tokens_dict = ["<cls>", "<s>", "</s>", "<mask>", "<pad>", "<sep>", "<unk>", "<r>", "<x>"]
+special_tokens_dict = ["<cls>", "<s>", "</s>", "<mask>", "<pad>", "<sep>", "<unk>", "[r]", "[x]", "[s]"]
 
 # Add extra masking tokens for the FAT5 model
 for i in range(256):
