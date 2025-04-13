@@ -8,6 +8,10 @@
 [![huggingface](https://img.shields.io/badge/📝_Blog_post-French_version-f5de53?&color=blue)](https://huggingface.co/spaces/CATIE-AQ/FAT5-rapport)
 </div>
 
+## ToDo
+
+- [ ] test tokenizer with the causal prefix as sentence start token like "<s>[s]" instead of "<s>".
+
 ## News
   
 - **10 January 2025**: FAT5 "official release" with code (this repo), [model weights](https://huggingface.co/CATIE-AQ/FAT5-small) and technical report (available in [English](https://huggingface.co/spaces/CATIE-AQ/FAT5-report) and [French](https://huggingface.co/spaces/CATIE-AQ/FAT5-rapport)).
