@@ -55,18 +55,22 @@ config_collator = config["collator_args"]
 model_config = config["model_args"]
 config_training_arguments = config["training_args"]
 
+# denoiser list with lower case prefixes
+# no prefix for causal learning because that is later on the default
+custom_denoiser_list = [{"mu": 3.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "<r>"},
+{"mu": 8.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "<r>"},
+{"mu": 4.0, "r": 0.0, "max_spans": 1, "prefix": ""},
+{"mu": 3.0, "r": 0.5, "max_spans": config_collator["max_token_length"], "prefix": "<x>"},
+{"mu": 8.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "<x>"},
+{"mu": 64.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "<x>"},
+{"mu": 64.0, "r": 0.5, "max_spans": config_collator["max_token_length"], "prefix": "<x>"}]
+
 data_collator = DataCollatorForUL2MLM(
     tokenizer=tokenizer,
     max_length=config_collator["max_token_length"],
     max_labels_length=config_collator["max_labels_length"],
     batch_size=config_collator["output_batch_size"],
-    denoiser_list=[{"mu": 3.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "[R]"},
-                   {"mu": 8.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "[R]"},
-                   {"mu": 4.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-                   {"mu": 3.0, "r": 0.5, "max_spans": config_collator["max_token_length"], "prefix": "[X]"},
-                   {"mu": 8.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "[X]"},
-                   {"mu": 64.0, "r": 0.15, "max_spans": config_collator["max_token_length"], "prefix": "[X]"},
-                   {"mu": 64.0, "r": 0.5, "max_spans": config_collator["max_token_length"], "prefix": "[X]"}],
+    denoiser_list=custom_denoiser_list,
     denoiser_proportions=[0.165, 0.165, 0.34, 0.0825, 0.0825, 0.0825, 0.0825]
 )
 
