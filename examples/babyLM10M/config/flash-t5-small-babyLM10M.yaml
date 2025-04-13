@@ -10,14 +10,14 @@ model_args:
   auto_map:
     AutoModel: modeling_flash_t5.FlashT5ForConditionalGeneration
   d_ff: 1024
-  d_kv: 64
-  d_model: 512
+  d_kv: 32
+  d_model: 256
   decoder_start_token_id: 0
   label_smoothing: 0.0
   max_sequence_length: 256
   model_type: flash_t5
-  num_heads: 4
-  num_layers: 6
+  num_heads: 3
+  num_layers: 5
   position_encoding_type: t5
   tie_word_embeddings: false
   attention_type: ref
@@ -47,7 +47,7 @@ training_args:
   gradient_checkpointing: false
   group_by_length: false
   include_tokens_per_second: true
-  learning_rate: 5.0e-3
+  learning_rate: 5.0e-2
   logging_steps: 100
   logging_strategy: steps
   lr_scheduler_type: linear
