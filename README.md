@@ -10,7 +10,7 @@
 
 ## ToDo
 
-- [ ] test tokenizer with the causal prefix as sentence start token like "<s>[s]" instead of "<s>".
+- [ ] test tokenizer with the causal prefix as sentence start token like "<start>[s]" instead of "<start>".
 
 ## News
   
