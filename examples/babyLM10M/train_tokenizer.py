@@ -14,7 +14,7 @@ def batch_iterator(dataset, batch_size=1000):
     for batch in dataset.iter(batch_size=batch_size):
         yield batch["text"]
 
-special_tokens_dict = ["<cls>", "<s>", "</s>", "<mask>", "<pad>", "<sep>", "<unk>", "\t"]
+special_tokens_dict = ["<cls>", "<s>", "</s>", "<mask>", "<pad>", "<sep>", "<unk>"]
 
 # Add extra masking tokens for the FAT5 model
 for i in range(64):
@@ -24,7 +24,8 @@ for i in range(64):
 # test small vocab size
 vocab_size = 1024
 # Taken from Llama
-pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+"
+# seperate also tabs with "|\t"
+pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\t|\s+(?!\S)|\s+"
 
 # Train the tokenizer
 tokenizer = Tokenizer(BPE(unk_token="<unk>"))
