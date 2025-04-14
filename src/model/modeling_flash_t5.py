@@ -118,6 +118,7 @@ def causal_activation(forwarded_states):
     """
     map the causal activation on the batch
     """
+    #print(forwarded_states.shape)
     return vmap(causal_max_reduction)(forwarded_states)
     
 def get_ff_activation(config):
