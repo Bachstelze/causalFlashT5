@@ -7,6 +7,9 @@ from typing import Optional, Tuple, Union
 import torch
 from torch import nn
 import torch.nn.functional as F
+from torch import vmap
+
+import causal_reduction
 
 from transformers.modeling_utils import ModuleUtilsMixin
 from transformers.modeling_outputs import ModelOutput, Seq2SeqModelOutput, BaseModelOutput, Seq2SeqLMOutput
@@ -143,11 +146,16 @@ class FlashT5DenseGatedAct(nn.Module):
         hidden_states = self.dropout(hidden_states)
 
         return hidden_states
-
+        
+def causal_activation(forwarded_states):
+    return vmap(causal_reduction.causal_max_reduction)(forwarded_states)
+    
 class FlashT5LayerFF(nn.Module):
     def __init__(self, config: FlashT5Config):
         super().__init__()
-        if config.use_glu_mlp:
+        if hasattr(config, 'use_causal_activation') and config.use_causal_activation and config.is_decoder:
+            self.act = causal_activation
+        elif config.use_glu_mlp:
             self.act = FlashT5DenseGatedAct(config)
         else:
             self.act = FlashT5DenseAct(config)
