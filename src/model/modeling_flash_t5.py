@@ -114,12 +114,30 @@ class FlashT5LayerNorm(nn.Module):
 
         return self.weight * hidden_states
 
+def causal_activation(forwarded_states):
+    """
+    map the causal activation on the batch
+    """
+    return vmap(causal_max_reduction)(forwarded_states)
+    
+def get_ff_activation(config):
+    """
+    return the configurated activation function 
+    """
+    if hasattr(config, 'use_causal_activation') and config.use_causal_activation and config.is_decoder:
+        return causal_activation
+    elif config.use_gelu_act:
+        return torch.nn.GELU(approximate='tanh')
+    else:
+        return torch.nn.ReLU()
+        
 class FlashT5DenseAct(nn.Module):
     def __init__(self, config: FlashT5Config):
         super().__init__()
         self.wi = nn.Linear(config.d_model, config.d_ff, bias=False)
         self.dropout = nn.Dropout(config.dropout_rate)
-        self.act = torch.nn.GELU(approximate='tanh') if config.use_gelu_act else torch.nn.ReLU()
+        self.act = get_ff_activation(config)
+        #self.act = torch.nn.GELU(approximate='tanh') if config.use_gelu_act else torch.nn.ReLU()
 
     def forward(self, hidden_states):
         hidden_states = self.wi(hidden_states)
@@ -134,7 +152,8 @@ class FlashT5DenseGatedAct(nn.Module):
         self.wi_0 = nn.Linear(config.d_model, config.d_ff, bias=False)
         self.wi_1 = nn.Linear(config.d_model, config.d_ff, bias=False)
         self.dropout = nn.Dropout(config.dropout_rate)
-        self.act = torch.nn.GELU(approximate='tanh') if config.use_gelu_act else torch.nn.ReLU()
+        self.act = get_ff_activation(config)
+        #self.act = torch.nn.GELU(approximate='tanh') if config.use_gelu_act else torch.nn.ReLU()
 
         self.use_gelu_act = config.use_gelu_act
 
@@ -147,15 +166,10 @@ class FlashT5DenseGatedAct(nn.Module):
 
         return hidden_states
         
-def causal_activation(forwarded_states):
-    return vmap(causal_max_reduction)(forwarded_states)
-    
 class FlashT5LayerFF(nn.Module):
     def __init__(self, config: FlashT5Config):
         super().__init__()
-        if hasattr(config, 'use_causal_activation') and config.use_causal_activation and config.is_decoder:
-            self.act = causal_activation
-        elif config.use_glu_mlp:
+        if config.use_glu_mlp:
             self.act = FlashT5DenseGatedAct(config)
         else:
             self.act = FlashT5DenseAct(config)
