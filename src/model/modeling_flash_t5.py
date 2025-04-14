@@ -9,7 +9,7 @@ from torch import nn
 import torch.nn.functional as F
 from torch import vmap
 
-from .causal_reduction import causal_max_reduction
+from .causal_reduction import causal_matrix_reduction
 
 from transformers.modeling_utils import ModuleUtilsMixin
 from transformers.modeling_outputs import ModelOutput, Seq2SeqModelOutput, BaseModelOutput, Seq2SeqLMOutput
@@ -119,7 +119,7 @@ def causal_activation(forwarded_states):
     map the causal activation on the batch
     """
     #print(forwarded_states.shape)
-    return vmap(causal_max_reduction)(forwarded_states)
+    return vmap(causal_matrix_reduction)(forwarded_states)
     
 def get_ff_activation(config):
     """
