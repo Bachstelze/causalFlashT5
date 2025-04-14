@@ -21,7 +21,7 @@ model_args:
   position_encoding_type: t5
   tie_word_embeddings: false
   attention_type: ref
-  use_glu_mlp: false
+  use_glu_mlp: true
   use_causal_activation: true
   use_randomized_position_encoding: false
   z_loss: 0.0001
@@ -48,7 +48,7 @@ training_args:
   gradient_checkpointing: false
   group_by_length: false
   include_tokens_per_second: true
-  learning_rate: 5.0e-2
+  learning_rate: 2.0e-2
   logging_steps: 100
   logging_strategy: steps
   lr_scheduler_type: linear
