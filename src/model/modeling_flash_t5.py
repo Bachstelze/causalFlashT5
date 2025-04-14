@@ -9,7 +9,7 @@ from torch import nn
 import torch.nn.functional as F
 from torch import vmap
 
-import causal_reduction
+from .causal_reduction import causal_max_reduction
 
 from transformers.modeling_utils import ModuleUtilsMixin
 from transformers.modeling_outputs import ModelOutput, Seq2SeqModelOutput, BaseModelOutput, Seq2SeqLMOutput
@@ -148,7 +148,7 @@ class FlashT5DenseGatedAct(nn.Module):
         return hidden_states
         
 def causal_activation(forwarded_states):
-    return vmap(causal_reduction.causal_max_reduction)(forwarded_states)
+    return vmap(causal_max_reduction)(forwarded_states)
     
 class FlashT5LayerFF(nn.Module):
     def __init__(self, config: FlashT5Config):
