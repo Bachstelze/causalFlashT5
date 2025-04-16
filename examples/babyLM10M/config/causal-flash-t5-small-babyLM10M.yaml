@@ -43,6 +43,8 @@ training_args:
   do_eval: true
   eval_accumulation_steps: 1
   eval_steps: 500
+  eval_strategy: epoch
+  num_train_epochs: 4
   gradient_accumulation_steps: 1
   gradient_checkpointing: false
   group_by_length: false
@@ -52,7 +54,6 @@ training_args:
   logging_strategy: steps
   lr_scheduler_type: linear
   max_grad_norm: 1.0
-  max_steps: 10000
   metric_for_best_model: eval_loss
   optim: adamw_torch
   overwrite_output_dir: true
