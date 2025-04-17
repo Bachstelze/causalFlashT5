@@ -1,4 +1,4 @@
-model_name: causal-flash-t5-small-babyLM10M
+model_name: flash-t5-small-babyLM10M
 version : 1
 tokenizer_name: tokenizer-fat5-babyLM10M
 train_dataset: babyLM10M_tokenized_flasht5/train
@@ -49,7 +49,7 @@ training_args:
   gradient_checkpointing: false
   group_by_length: false
   include_tokens_per_second: true
-  learning_rate: 3e-2
+  learning_rate: 0.03
   logging_steps: 100
   logging_strategy: steps
   lr_scheduler_type: linear
@@ -62,10 +62,9 @@ training_args:
   remove_unused_columns: false
   resume_from_checkpoint: null
   save_safetensors: false
-  save_steps: 1000
-  save_strategy: steps
+  save_strategy: epoch
   seed: 42
-  torch_compile: false
+  torch_compile: true
   weight_decay: 0.0
 collator_args:
   max_token_length: 256
