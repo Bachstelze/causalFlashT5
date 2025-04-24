@@ -76,3 +76,27 @@ def causal_matrix_reduction(batch):
 
   # only return the min values without the index
   return static_reduction[0]
+
+def causal_context_unity_matrix(batch):
+  """
+  This function simplifies causal attention as a static reduction.
+  The first token can only attend to itself and remains unchanged.
+  Every following token is compared with the previous one.
+  A global mean is calculated additionally.
+  """
+  sequence_length, token_dimension = batch.size()
+
+  # calculate the global mean
+  global_mean = torch.mean(batch, dim=0)
+  # take the unchanged first token and unqsueeze it into a single tensor
+  first_sequence = batch[0].unsqueeze(0)
+  # repeat the global mean into a tensor, the first token is copied
+  global_tensor = torch.concat((first_sequence, global_mean.repeat(sequence_length-1,1)), 0)
+  # Concatenate the first sequence token with an empty batch
+  causal_shift = torch.concat((first_sequence, batch[:-1]),0)
+  # stack of the original tensor with the causal shift and the global mean
+  concatenation = torch.stack((batch, causal_shift, global_tensor),1)
+  static_reduction = torch.max(concatenation, dim=1)
+
+  # only return the max values without the index
+  return static_reduction[0]
