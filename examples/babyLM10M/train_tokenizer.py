@@ -24,7 +24,7 @@ for i in range(256):
 
 #vocab_size = 32768
 # test small vocab size
-vocab_size = 1024
+vocab_size = 1075
 
 # Taken from Llama
 pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+"
@@ -33,7 +33,7 @@ pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[
 tokenizer = Tokenizer(BPE(unk_token="<unk>"))
 trainer = BpeTrainer(vocab_size=vocab_size, special_tokens=special_tokens_dict, max_token_length=20)
 tokenizer.pre_tokenizer = Sequence([Split(pattern=Regex(pat_str), behavior="isolated"), Digits(individual_digits=True)])
-#tokenizer.normalizer = Lowercase()
+tokenizer.normalizer = Lowercase()
 
 tokenizer.train_from_iterator(batch_iterator(df), trainer)
 pretrained_tokenizer = T5TokenizerFast(tokenizer_object=tokenizer, clean_up_tokenization_spaces=False)
