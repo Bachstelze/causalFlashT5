@@ -70,16 +70,16 @@ old_denoiser_proportions=[0.165, 0.165, 0.34, 0.0825, 0.0825, 0.0825, 0.0825]
 #mostly causal denoising with variablespan size
 #only 10% is masked language modeling
 causal_denoiser = [
-  {"mu": 4.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 6.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 8.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 10.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 12.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 14.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 16.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 18.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 20.0, "r": 0.0, "max_spans": 1, "prefix": "[S]"},
-  {"mu": 32.0, "r": 0.3, "max_spans": config_collator["max_token_length"], "prefix": "[X]"}
+  {"mu": 4.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 6.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 8.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 10.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 12.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 14.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 16.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 18.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 20.0, "r": 0.0, "max_spans": 1, "prefix": "[s]"},
+  {"mu": 32.0, "r": 0.3, "max_spans": config_collator["max_token_length"], "prefix": "[x]"}
 ]
 
 causal_denoiser_proportions=[0.1]*10
