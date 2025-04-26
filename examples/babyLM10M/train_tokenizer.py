@@ -19,12 +19,12 @@ def batch_iterator(dataset, batch_size=1000):
 special_tokens_dict = ["<cls>", "<s>", "</s>", "<mask>", "<pad>", "<sep>", "<unk>", "[x]", "[s]"]
 
 # Add extra masking tokens for the FAT5 model
-for i in range(128):
+for i in range(256):
     special_tokens_dict.append("<extra_id_" + str(i) + ">")
 
 #vocab_size = 32768
 # test small vocab size
-vocab_size = 1024
+vocab_size = 4096
 
 # Taken from Llama
 pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+"
