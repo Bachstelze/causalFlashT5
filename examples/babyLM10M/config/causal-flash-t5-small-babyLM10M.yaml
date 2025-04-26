@@ -9,14 +9,14 @@ model_args:
   dropout_rate: 0.0
   auto_map:
     AutoModel: modeling_flash_t5.FlashT5ForConditionalGeneration
-  d_ff: 1024
+  d_ff: 512
   d_kv: 64
-  d_model: 256
+  d_model: 512
   decoder_start_token_id: 0
   label_smoothing: 0.0
-  max_sequence_length: 256
+  max_sequence_length: 128
   model_type: flash_t5
-  num_heads: 4
+  num_heads: 8
   num_layers: 4
   position_encoding_type: t5
   tie_word_embeddings: false
@@ -67,6 +67,6 @@ training_args:
   torch_compile: true
   weight_decay: 0.0
 collator_args:
-  max_token_length: 256
-  max_labels_length: 256
-  output_batch_size: 256
+  max_token_length: 128
+  max_labels_length: 128
+  output_batch_size: 128
