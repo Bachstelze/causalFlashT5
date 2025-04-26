@@ -17,7 +17,7 @@ model_args:
   max_sequence_length: 128
   model_type: flash_t5
   num_heads: 8
-  num_layers: 4
+  num_layers: 3
   position_encoding_type: t5
   tie_word_embeddings: false
   attention_type: ref
