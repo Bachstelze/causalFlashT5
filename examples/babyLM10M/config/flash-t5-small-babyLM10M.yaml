@@ -20,7 +20,7 @@ model_args:
   num_layers: 6
   position_encoding_type: t5
   tie_word_embeddings: false
-  attention_type: triton
+  attention_type: ref
   use_glu_mlp: true
   use_causal_activation: false
   use_randomized_position_encoding: false
