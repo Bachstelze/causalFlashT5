@@ -1,4 +1,4 @@
-model_name: tanh-256-positions
+model_name: 2048vocab-tanh-256-positions
 version : 1
 tokenizer_name: tokenizer-fat5-babyLM10M
 train_dataset: babyLM10M_tokenized_flasht5/train
