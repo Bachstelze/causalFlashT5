@@ -53,7 +53,7 @@ training_args:
   logging_strategy: steps
   lr_scheduler_type: linear
   max_grad_norm: 1.0
-  max_steps: 3000
+  max_steps: 13300
   metric_for_best_model: eval_loss
   optim: adamw_torch
   overwrite_output_dir: true
@@ -67,7 +67,7 @@ training_args:
   seed: 42
   torch_compile: false
   warmup_ratio: 0.0
-  warmup_steps: 1000
+  warmup_steps: 3990
   weight_decay: 0.0
 collator_args:
   max_token_length: 256
