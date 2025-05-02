@@ -10,6 +10,7 @@
 
 ## ToDo
 
+- [ ] add GEC data (256 examples as replacement for dev and validation set)
 - [ ] test tokenizer with the causal prefix as sentence start token like "<start>[s]" instead of "<start>".
 
 ## News
