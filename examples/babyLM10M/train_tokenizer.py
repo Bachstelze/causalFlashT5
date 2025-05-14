@@ -25,8 +25,6 @@ for i in range(256):
 #vocab_size = 32768
 # test small vocab size
 vocab_size = 2048
-# even smaller vocab size
-vocab_size = 896
 
 # Taken from Llama
 pat_str = r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+"
